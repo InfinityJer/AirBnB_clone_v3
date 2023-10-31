@@ -114,6 +114,12 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
+
+class TestDBStorage(unittest.TestCase):
+    """Test the DBStorage class"""
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
+                     "not testing db storage")
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
         """ tests the db_storage get function """
