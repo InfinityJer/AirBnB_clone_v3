@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Amenities view module"""
+"""Amenities view module API"""
 from models import storage
 from api.v1.views import app_views
 from flask import jsonify, abort, request
@@ -15,12 +15,13 @@ def get_amenities():
 
 @app_views.route('/amenities/<amenity_id>',
                  methods=['GET'], strict_slashes=False)
-def get_amenity(amenity_id):
+def get_amenity_id(amenity_id):
     """Retrieves a Amenity object"""
     amenity = storage.get("Amenity", amenity_id)
     if amenity is None:
         abort(404)
     return jsonify(amenity.to_dict())
+
 
 @app_views.route('/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
@@ -48,9 +49,9 @@ def create_amenities():
         return jsonify(obj.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>',
+@app_views.route('/amenities/<amenities_id>',
                  methods=['PUT'], strict_slashes=False)
-def update_amenity(amenity_id):
+def update_amenity(amenities_id):
     """Updates a Amenity object"""
     if not request.get_json():
         return jsonify({"error": "Not a JSON"}), 400
