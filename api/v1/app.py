@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from flask_cors import CORS
 
 
-# creating a Flask app
+# creates a Flask app
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
@@ -15,6 +15,7 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 app.register_blueprint(app_views, url_prefix="/api/v1")
 
 
+# error handler
 @app.errorhandler(404)
 def page_not_found(e):
     return {"error": "Not found"}, 404
@@ -28,6 +29,9 @@ def page_not_found(e):
 
 @app.teardown_appcontext
 def close(ctx):
+    """
+    Teardown method to close the storage
+    """
     storage.close()
 
 
