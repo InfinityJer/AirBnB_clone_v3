@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Endpoint (route) will be to return the status of your API"""
+'''
+    app to register blueprint and start up flask
+'''
 import os
 from flask import Flask
 from models import storage
